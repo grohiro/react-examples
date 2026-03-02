@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ReactHooksUseMemoIndexRouteImport } from './routes/react-hooks/use-memo/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReactHooksUseMemoIndexRoute = ReactHooksUseMemoIndexRouteImport.update({
+  id: '/react-hooks/use-memo/',
+  path: '/react-hooks/use-memo/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/react-hooks/use-memo/': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/react-hooks/use-memo': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/react-hooks/use-memo/': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/react-hooks/use-memo/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/react-hooks/use-memo'
+  id: '__root__' | '/' | '/react-hooks/use-memo/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ReactHooksUseMemoIndexRoute: typeof ReactHooksUseMemoIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/react-hooks/use-memo/': {
+      id: '/react-hooks/use-memo/'
+      path: '/react-hooks/use-memo'
+      fullPath: '/react-hooks/use-memo/'
+      preLoaderRoute: typeof ReactHooksUseMemoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ReactHooksUseMemoIndexRoute: ReactHooksUseMemoIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
