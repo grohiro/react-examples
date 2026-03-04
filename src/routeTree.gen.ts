@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactHooksUseMemoIndexRouteImport } from './routes/react-hooks/use-memo/index'
 import { Route as ReactHooksUseEffectIndexRouteImport } from './routes/react-hooks/use-effect/index'
+import { Route as ReactHooksUseCallbackIndexRouteImport } from './routes/react-hooks/use-callback/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,33 +30,56 @@ const ReactHooksUseEffectIndexRoute =
     path: '/react-hooks/use-effect/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ReactHooksUseCallbackIndexRoute =
+  ReactHooksUseCallbackIndexRouteImport.update({
+    id: '/react-hooks/use-callback/',
+    path: '/react-hooks/use-callback/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/react-hooks/use-callback/': typeof ReactHooksUseCallbackIndexRoute
   '/react-hooks/use-effect/': typeof ReactHooksUseEffectIndexRoute
   '/react-hooks/use-memo/': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/react-hooks/use-callback': typeof ReactHooksUseCallbackIndexRoute
   '/react-hooks/use-effect': typeof ReactHooksUseEffectIndexRoute
   '/react-hooks/use-memo': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/react-hooks/use-callback/': typeof ReactHooksUseCallbackIndexRoute
   '/react-hooks/use-effect/': typeof ReactHooksUseEffectIndexRoute
   '/react-hooks/use-memo/': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/react-hooks/use-effect/' | '/react-hooks/use-memo/'
+  fullPaths:
+    | '/'
+    | '/react-hooks/use-callback/'
+    | '/react-hooks/use-effect/'
+    | '/react-hooks/use-memo/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/react-hooks/use-effect' | '/react-hooks/use-memo'
-  id: '__root__' | '/' | '/react-hooks/use-effect/' | '/react-hooks/use-memo/'
+  to:
+    | '/'
+    | '/react-hooks/use-callback'
+    | '/react-hooks/use-effect'
+    | '/react-hooks/use-memo'
+  id:
+    | '__root__'
+    | '/'
+    | '/react-hooks/use-callback/'
+    | '/react-hooks/use-effect/'
+    | '/react-hooks/use-memo/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ReactHooksUseCallbackIndexRoute: typeof ReactHooksUseCallbackIndexRoute
   ReactHooksUseEffectIndexRoute: typeof ReactHooksUseEffectIndexRoute
   ReactHooksUseMemoIndexRoute: typeof ReactHooksUseMemoIndexRoute
 }
@@ -83,11 +107,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReactHooksUseEffectIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/react-hooks/use-callback/': {
+      id: '/react-hooks/use-callback/'
+      path: '/react-hooks/use-callback'
+      fullPath: '/react-hooks/use-callback/'
+      preLoaderRoute: typeof ReactHooksUseCallbackIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ReactHooksUseCallbackIndexRoute: ReactHooksUseCallbackIndexRoute,
   ReactHooksUseEffectIndexRoute: ReactHooksUseEffectIndexRoute,
   ReactHooksUseMemoIndexRoute: ReactHooksUseMemoIndexRoute,
 }
