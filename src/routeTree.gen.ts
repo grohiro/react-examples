@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ReactHooksUseMemoIndexRouteImport } from './routes/react-hooks/use-memo/index'
+import { Route as ReactHooksUseEffectIndexRouteImport } from './routes/react-hooks/use-effect/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,30 +23,40 @@ const ReactHooksUseMemoIndexRoute = ReactHooksUseMemoIndexRouteImport.update({
   path: '/react-hooks/use-memo/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReactHooksUseEffectIndexRoute =
+  ReactHooksUseEffectIndexRouteImport.update({
+    id: '/react-hooks/use-effect/',
+    path: '/react-hooks/use-effect/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/react-hooks/use-effect/': typeof ReactHooksUseEffectIndexRoute
   '/react-hooks/use-memo/': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/react-hooks/use-effect': typeof ReactHooksUseEffectIndexRoute
   '/react-hooks/use-memo': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/react-hooks/use-effect/': typeof ReactHooksUseEffectIndexRoute
   '/react-hooks/use-memo/': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/react-hooks/use-memo/'
+  fullPaths: '/' | '/react-hooks/use-effect/' | '/react-hooks/use-memo/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/react-hooks/use-memo'
-  id: '__root__' | '/' | '/react-hooks/use-memo/'
+  to: '/' | '/react-hooks/use-effect' | '/react-hooks/use-memo'
+  id: '__root__' | '/' | '/react-hooks/use-effect/' | '/react-hooks/use-memo/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ReactHooksUseEffectIndexRoute: typeof ReactHooksUseEffectIndexRoute
   ReactHooksUseMemoIndexRoute: typeof ReactHooksUseMemoIndexRoute
 }
 
@@ -65,11 +76,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReactHooksUseMemoIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/react-hooks/use-effect/': {
+      id: '/react-hooks/use-effect/'
+      path: '/react-hooks/use-effect'
+      fullPath: '/react-hooks/use-effect/'
+      preLoaderRoute: typeof ReactHooksUseEffectIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ReactHooksUseEffectIndexRoute: ReactHooksUseEffectIndexRoute,
   ReactHooksUseMemoIndexRoute: ReactHooksUseMemoIndexRoute,
 }
 export const routeTree = rootRouteImport
