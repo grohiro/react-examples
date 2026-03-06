@@ -4,5 +4,11 @@
   "license": "UNLICENSED",
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "scripts": {
+    "dev": "concurrently -n react,hono \"npm run -w react-demo dev\" \"npm run -w hono-demo dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
 }
