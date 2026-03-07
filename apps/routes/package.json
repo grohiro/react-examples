@@ -1,0 +1,11 @@
+{
+  "name": "routes",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "@orpc/server": "^1.13.6",
+    "zod": "^4.3.6"
+  }
+}

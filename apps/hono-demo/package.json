@@ -9,7 +9,8 @@
   "dependencies": {
     "@hono/node-server": "^1.19.11",
     "@orpc/server": "^1.13.6",
-    "hono": "^4.12.5"
+    "hono": "^4.12.5",
+    "routes": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
