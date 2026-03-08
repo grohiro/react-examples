@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OrpcIndexRouteImport } from './routes/orpc/index'
 import { Route as ReactHooksUseMemoIndexRouteImport } from './routes/react-hooks/use-memo/index'
 import { Route as ReactHooksUseEffectIndexRouteImport } from './routes/react-hooks/use-effect/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrpcIndexRoute = OrpcIndexRouteImport.update({
+  id: '/orpc/',
+  path: '/orpc/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReactHooksUseMemoIndexRoute = ReactHooksUseMemoIndexRouteImport.update({
@@ -32,30 +38,43 @@ const ReactHooksUseEffectIndexRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/orpc/': typeof OrpcIndexRoute
   '/react-hooks/use-effect/': typeof ReactHooksUseEffectIndexRoute
   '/react-hooks/use-memo/': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/orpc': typeof OrpcIndexRoute
   '/react-hooks/use-effect': typeof ReactHooksUseEffectIndexRoute
   '/react-hooks/use-memo': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/orpc/': typeof OrpcIndexRoute
   '/react-hooks/use-effect/': typeof ReactHooksUseEffectIndexRoute
   '/react-hooks/use-memo/': typeof ReactHooksUseMemoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/react-hooks/use-effect/' | '/react-hooks/use-memo/'
+  fullPaths:
+    | '/'
+    | '/orpc/'
+    | '/react-hooks/use-effect/'
+    | '/react-hooks/use-memo/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/react-hooks/use-effect' | '/react-hooks/use-memo'
-  id: '__root__' | '/' | '/react-hooks/use-effect/' | '/react-hooks/use-memo/'
+  to: '/' | '/orpc' | '/react-hooks/use-effect' | '/react-hooks/use-memo'
+  id:
+    | '__root__'
+    | '/'
+    | '/orpc/'
+    | '/react-hooks/use-effect/'
+    | '/react-hooks/use-memo/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  OrpcIndexRoute: typeof OrpcIndexRoute
   ReactHooksUseEffectIndexRoute: typeof ReactHooksUseEffectIndexRoute
   ReactHooksUseMemoIndexRoute: typeof ReactHooksUseMemoIndexRoute
 }
@@ -67,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orpc/': {
+      id: '/orpc/'
+      path: '/orpc'
+      fullPath: '/orpc/'
+      preLoaderRoute: typeof OrpcIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/react-hooks/use-memo/': {
@@ -88,6 +114,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  OrpcIndexRoute: OrpcIndexRoute,
   ReactHooksUseEffectIndexRoute: ReactHooksUseEffectIndexRoute,
   ReactHooksUseMemoIndexRoute: ReactHooksUseMemoIndexRoute,
 }
