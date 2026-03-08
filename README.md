@@ -7,14 +7,18 @@
 - Vite v7.3
 - React v19.2
 - Tanstack Router v1
+- oRPC client
+
+### UI
 - shadcn/ui v3.8
 - Radix UI v3.3
 - Tailwind CSS v4.2
 
-## Hono API Server
+## Hono RPC Server
 [apps/hono-demo](./apps/honoe-demo)
 
 - Hono v4.12
+- oRPC server
 
 ## Development
 
