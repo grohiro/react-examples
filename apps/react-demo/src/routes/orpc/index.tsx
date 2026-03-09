@@ -26,9 +26,9 @@ function OrpcComponent() {
 
   return (
     <PageContainer>
-      <Input onChange={handleChangeName} className="w-80" />
-      <div>
-        {greeting}
+      <Input onChange={handleChangeName} className="w-80" placeholder="your name here"/>
+      <div className="my-2">
+        Response from oRPC server: {greeting}
       </div>
     </PageContainer>
   )

@@ -25,9 +25,9 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <Theme appearance="dark" >
         <RouterProvider router={router} />
-        <ThemePanel />
+        <ThemePanel defaultOpen={true} />
       </Theme>
-      <TanStackRouterDevtools router={router} />
+      <TanStackRouterDevtools router={router} initialIsOpen={false} />
     </StrictMode>
   )
 }
